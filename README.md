@@ -12,10 +12,10 @@ A simple blog application built with React and TypeScript that allows users to c
 
 ## Tech Stack
 
-- **Frontend**: React, TypeScript, Tailwind CSS (optional for styling)
-- **State Management**: React Context API or any other state management library (if used)
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **State Management**: React Context API 
 - **Routing**: React Router
-- **Backend**: (Specify if using any backend service like Firebase, Express.js, etc.)
-- **Database**: (Specify if using a database like MongoDB, Firebase, etc.)
+- **Backend**: cloudflare worker , prisma 
+- **Database**: PostgreSQL
 
 
