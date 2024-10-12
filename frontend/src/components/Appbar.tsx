@@ -4,7 +4,7 @@ import { FiLogOut } from "react-icons/fi";
 
 export const Appbar = () => {
     return <div className="border-b flex justify-between px-8 py-4 shadow-md">
-        <Link to={'/blogs'} className="flex flex-col justify-center cursor-pointer font-bold text-3xl tracking-wide">
+        <Link to={'/blogs'} className="flex flex-col justify-center cursor-pointer  text-3xl tracking-wide font-extrabold font-serif">
                 Blogify
         </Link>
         <div className="inline-flex">

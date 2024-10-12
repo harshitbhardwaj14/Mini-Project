@@ -19,7 +19,7 @@ const Welcome: React.FC<TypewriterProps> = ({ text }) => {
   }, [index, text]);
 
   return (
-    <h1 className="font-bold text-gray-900 tracking-wide">
+    <h1 className="font-bold tracking-wide">
       {displayText}
       <span className="animate-pulse">|</span> {/* Blinking cursor */}
     </h1>
