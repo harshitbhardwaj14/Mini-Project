@@ -10,36 +10,31 @@ export const Blogs = () => {
     return (
       <div>
         <Appbar />
-        <div className="flex justify-center py-8">
-          <div>
-            <BlogSkeleton />
-            <BlogSkeleton />
-            <BlogSkeleton />
-            <BlogSkeleton />
-            <BlogSkeleton />
-            <BlogSkeleton />
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 mx-auto max-w-7xl">
+          {[...Array(6)].map((_, index) => (
+            <BlogSkeleton key={index} />
+          ))}
         </div>
       </div>
     );
   }
 
   return (
-    <div>
+    <div >
       <Appbar />
-      <div className="flex justify-center">
-        <div>
-          <p className="font-bold text-5xl py-8 px-6 cursor-pointer">Trending</p>
-          {blogs.map((blog) => (
-            <BlogCard
-              id={blog.id}
-              authorName={blog.author.name || "Anonymous"}
-              title={blog.title}
-              content={blog.content}
-              publishedDate={"2nd Feb 2024"}
-            />
-          ))}
-        </div>
+      <h1 className="text-4xl font-bold p-6 pb-2 mx-auto max-w-7xl">Trending Now</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6  mx-auto max-w-7xl">
+        
+        {blogs.map((blog) => (
+          <BlogCard
+            key={blog.id}
+            id={blog.id}
+            authorName={blog.author.name || "Anonymous"}
+            title={blog.title}
+            content={blog.content}
+            publishedDate={blog.publishedDate}
+          />
+        ))}
       </div>
     </div>
   );

@@ -1,0 +1,75 @@
+.prose h1 {
+    font-size: 2.5rem;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+  
+  .prose h2 {
+    font-size: 2rem;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+  
+  .prose h3 {
+    font-size: 1.75rem;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+  
+  .prose p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  
+  .prose ul,
+  .prose ol {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  
+  .prose li {
+    margin-top: 0.5em;
+    margin-bottom: 1.8em;
+  }
+
+  .custom-headings h1 {
+    font-size: 2.5rem; /* 40px */
+    font-weight: 800; /* Extra bold */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+  
+  .custom-headings h2 {
+    font-size: 2rem; /* 32px */
+    font-weight: 700; /* Bold */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+  
+  .custom-headings h3 {
+    font-size: 1.75rem; /* 28px */
+    font-weight: 600; /* Semi-bold */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+  
+  .custom-headings h4 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600; /* Semi-bold */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+  
+  .custom-headings h5 {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600; /* Semi-bold */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+  
+  .custom-headings h6 {
+    font-size: 1rem; /* 16px */
+    font-weight: 600; /* Semi-bold */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }

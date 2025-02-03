@@ -3,6 +3,7 @@ import { FullBlog } from "../components/FullBlog";
 import { Spinner } from "../components/Spinner";
 import { useBlog } from "../hooks";
 import { useParams } from "react-router-dom";
+import "../App.css"
 
 // atomFamilies/selectorFamilies
 export const Blog = () => {
@@ -25,7 +26,7 @@ export const Blog = () => {
     );
   }
   return (
-    <div>
+    <div >
       <FullBlog blog={blog} />
     </div>
   );

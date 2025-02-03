@@ -1,0 +1,4 @@
+body {
+    background-color: #171717; /* This is the hex value for bg-neutral-900 in Tailwind CSS */
+    color: white; /* Optional: Set text color to white for better contrast */
+}

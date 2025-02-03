@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 interface BlogCardProps {
   authorName: string;
   title: string;
@@ -14,31 +15,54 @@ export const BlogCard = ({
   content,
   publishedDate,
 }: BlogCardProps) => {
+  const formattedDate = publishedDate
+    ? new Date(publishedDate).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : "Jan 1, 2025";
+
   return (
     <Link to={`/blog/${id}`}>
-      <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-screen-lg cursor-pointer hover:bg-slate-100 hover:transition-all px-8">
-        <div className="flex pb-2">
-          <Avatar name={authorName} />
-          <div className="font-medium tracking-wide pl-2 text-sm flex justify-center flex-col">
-            {authorName}
-          </div>
-          <div className="flex justify-center flex-col pl-2 align-middle">
-            <Circle />
-          </div>
-          <div className="pl-2  text-slate-500 text-sm flex justify-center flex-col">
-            {publishedDate}
-          </div>
-        </div>
+      <div className="bg-gray-50 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-2 group bg-neutral-800 shadow-black ">
+        {/* Blog Content */}
+        <div className="p-6">
+          {/* Author Section with Hover Effect */}
+          <div className="relative flex items-center space-x-2 mb-4 group-hover:justify-center transition-all duration-300">
+            <Avatar name={authorName} />
+            {/* Default Author Name and Date */}
+            <div className="text-sm font-medium text-gray-300 transition-all duration-300 group-hover:opacity-0">
+              {authorName}
+            </div>
+            
+            <div className="text-sm text-gray-300 transition-all duration-300 group-hover:opacity-0 flex items-center gap-x-2">
+            <Circle /> {formattedDate}
+            </div>
 
-        <div className="text-2xl font-semibold py-1 tracking-wide pb-2 hover:underline-offset-3 hover:underline hover:-translate-y-1 transition">
-          {title}
-        </div>
-        <div className="text-md tracking-wide">
-          {content.slice(0, 100) + "..."}
-        </div>
+            {/* "By Author" Text (Appears on Hover) */}
+            <div className="absolute opacity-0 group-hover:opacity-100 transition-all duration-300 text-gray-200 font-medium text-xl">
+              By {authorName}
+            </div>
+          </div>
 
-        <div className="text-slate-500 text-sm pt-4">
-          {`${Math.ceil(content.length / 100)} minute(s) read`}
+          {/* Title */}
+          <h2 className="text-xl font-bold text-gray-200 group-hover:text-blue-500 transition-colors duration-300">
+            {title}
+          </h2>
+
+          {/* Content Preview */}
+          <p className="mt-2 text-gray-400">{content.slice(0, 100) + "..."}</p>
+
+          {/* Read Time */}
+          <div className="my-4 text-sm text-gray-300">
+            {`${Math.ceil(content.length / 400)} minute(s) read`}
+          </div>
+
+          {/* Published Date */}
+          <div className="text-sm text-gray-300 flex items-center gap-x-2">
+            Published on <Circle /> {formattedDate}
+          </div>
         </div>
       </div>
     </Link>
@@ -46,23 +70,11 @@ export const BlogCard = ({
 };
 
 export function Circle() {
-  return (
-    <div className="h-1 w-1 rounded-full bg-slate-500 justify-center align-middle"></div>
-  );
+  return <div className="w-1 h-1 rounded-full bg-gray-500"></div>;
 }
 
 const getRandomColorClass = (): string => {
-  const colors: string[] = [
-    "bg-red-500",
-    "bg-blue-500",
-    "bg-green-500",
-    "bg-yellow-500",
-    "bg-purple-500",
-    "bg-pink-500",
-    "bg-indigo-500",
-    "bg-orange-500",
-    "bg-teal-500",
-  ];
+  const colors: string[] = ["bg-red-500"];
   const randomIndex: number = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 };
@@ -81,11 +93,7 @@ export function Avatar({
         size === "small" ? "w-6 h-6" : "w-10 h-10"
       }`}
     >
-      <span
-        className={`${
-          size === "small" ? "text-xs" : "text-md"
-        } font-medium dark:text-white`}
-      >
+      <span className={`${size === "small" ? "text-sm" : "text-md"} font-medium text-white`}>
         {name[0]}
       </span>
     </div>
