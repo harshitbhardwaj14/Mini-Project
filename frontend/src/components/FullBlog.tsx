@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
@@ -8,6 +8,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Blog } from "../hooks";
 import { Appbar } from "./Appbar";
 import { Avatar, Circle } from "./BlogCard";
+import GenericPopover from "./GenericPopover";
 
 // Cache interface
 interface SummaryCache {
@@ -84,7 +85,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
     <div>
       <Appbar />
       <div className="flex justify-center px-4">
-        <div className="grid grid-cols-1 md:grid-cols-12 w-full max-w-screen-xl pt-12 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 w-full max-w-screen-xl py-12 md:gap-2">
           {/* Blog Content */}
           <div className="md:col-span-8">
             <h1 className="text-5xl font-extrabold tracking-wide leading-tight">
@@ -106,46 +107,57 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
           </div>
 
           {/* Author Section */}
-          <div className="md:col-span-4 pl-6">
-            <h2 className="text-slate-600 text-lg font-semibold mb-4">Author</h2>
-            <div className="flex items-center">
-              <Avatar size="big" name={blog.author.name || "Anonymous"} />
-              <div className="ml-4">
-                <div className="text-xl font-bold">
-                  {blog.author.name || "Anonymous"}
+          <div className="md:col-span-4 md:pl-6 mt-6 md:mt-0">
+            <div className="border border-neutral-700 p-5 rounded-lg shadow-lg  mb-4">
+              <h1 className="text-gray-400 text-lg font-semibold mb-4 ">Author</h1>
+              <div className="items-center flex">
+                <Avatar size="big" name={blog.author.name || "Anonymous"} />
+                <div className="ml-4">
+                  <div className="text-xl font-bold">
+                    {blog.author.name || "Anonymous"}
+                  </div>
+                  <p className="pt-2 text-gray-400">
+                    Passionate writer sharing insights with the world.
+                  </p>
                 </div>
-                <p className="pt-2 text-slate-500">
-                  Passionate writer sharing insights with the world.
-                </p>
+
               </div>
             </div>
 
-            {/* Summarize Button and Summary Section */}
-            <div className="mt-8">
-              <button
-                onClick={() => summarizeContent(blog.content)}
-                disabled={isLoading || Date.now() - lastAttempt < 15000}
-                aria-busy={isLoading}
-                aria-live="polite"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed"
-              >
-                {isLoading ? "Summarizing..." : "Summarize Blog"}
-              </button>
+            {/* AI Summary Button */}
+            <GenericPopover
+              buttonText="Summarize for me"
+              popoverTitle="AI Summary"
+              popoverContent="Click to summarize this blog content!"
+              onClick={() => summarizeContent(blog.content)}
+              disabled={isLoading || Date.now() - lastAttempt < 15000}
+              isLoading={isLoading}
+            />
 
+
+            {/* Summarize Button and Summary Section */}
+            <div className="mt-6">
               {isLoading ? (
-                <div className="mt-6 text-slate-600">Summarizing... Please wait.</div>
+                <div className="my-6 bg-neutral-800 p-6 rounded-lg shadow-lg text-center text-gray-200">Please hold on</div>
               ) : summary ? (
-                <div className="mt-6">
-                  <h2 className="text-slate-600 text-lg font-semibold mb-4">Summary</h2>
-                  <ReactMarkdown className="text-slate-700 leading-relaxed">
-                    {summary.replace(/-/g, "•")}
-                  </ReactMarkdown>
+                <div className="my-6 bg-neutral-800 p-6 rounded-lg shadow-lg">
+                  <h2 className="text-gray-100 text-lg font-semibold mb-4">Summary</h2>
+                  <div className="text-gray-200 prose-sm prose-invert">
+                    {summary
+                      .replace(/-/g, "•") // Convert dashes to bullets
+                      .split("\n")
+                      .map((line, index) => (
+                        <p key={index} className="mb-3 last:mb-0">
+                          {line}
+                        </p>
+                      ))}
+                  </div>
                 </div>
               ) : (
-                <div className="mt-6 text-red-600">
+                <div className="my-6 text-gray-500 text-center">
                   {summary === "Rate limit exceeded. Please try again later."
                     ? "Rate limit exceeded. Please try again later."
-                    : "Click 'Summarize Blog' to generate a summary."}
+                    : "Click the button above to generate a summary."}
                 </div>
               )}
             </div>
