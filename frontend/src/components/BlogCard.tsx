@@ -17,31 +17,27 @@ export const BlogCard = ({
 }: BlogCardProps) => {
   const formattedDate = publishedDate
     ? new Date(publishedDate).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
     : "Jan 1, 2025";
 
   return (
     <Link to={`/blog/${id}`}>
-      <div className="bg-gray-50 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-2 group bg-neutral-800 shadow-black ">
+      <div className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-2 group border border-neutral-600">
         {/* Blog Content */}
         <div className="p-6">
           {/* Author Section with Hover Effect */}
           <div className="relative flex items-center space-x-2 mb-4 group-hover:justify-center transition-all duration-300">
-            <Avatar name={authorName} />
             {/* Default Author Name and Date */}
-            <div className="text-sm font-medium text-gray-300 transition-all duration-300 group-hover:opacity-0">
+            <div className="text-sm font-medium text-gray-300 transition-all duration-300 group-hover:opacity-0 gap-x-2 flex items-center">
+              <Avatar name={authorName} />
               {authorName}
-            </div>
-            
-            <div className="text-sm text-gray-300 transition-all duration-300 group-hover:opacity-0 flex items-center gap-x-2">
-            <Circle /> {formattedDate}
             </div>
 
             {/* "By Author" Text (Appears on Hover) */}
-            <div className="absolute opacity-0 group-hover:opacity-100 transition-all duration-300 text-gray-200 font-medium text-xl">
+            <div className="absolute opacity-0 group-hover:opacity-100 transition-all duration-300 text-gray-200 font-medium text-xl items-center flex space-x-4">
               By {authorName}
             </div>
           </div>
@@ -89,9 +85,8 @@ export function Avatar({
   const randomColorClass = getRandomColorClass();
   return (
     <div
-      className={`relative inline-flex items-center justify-center overflow-hidden ${randomColorClass} rounded-full ${
-        size === "small" ? "w-6 h-6" : "w-10 h-10"
-      }`}
+      className={`relative inline-flex items-center justify-center shrink-0 overflow-hidden ${randomColorClass} rounded-full ${size === "small" ? "w-6 h-6" : "w-10 h-10"
+        }`}
     >
       <span className={`${size === "small" ? "text-sm" : "text-md"} font-medium text-white`}>
         {name[0]}

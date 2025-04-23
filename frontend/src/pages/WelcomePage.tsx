@@ -14,7 +14,7 @@ function WelcomePage() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100 flex-col ">
+    <div className="flex justify-center items-center h-screen  flex-col ">
       <div className="text-5xl md:text-7xl font-serif">
         <Welcome text="Welcome to Blogify " />
       </div>
@@ -45,7 +45,7 @@ function WelcomePage() {
               ></path>
             </svg>
           </span>
-          <span className="ease absolute flex h-full w-full transform items-center justify-center transition-all duration-500 group-hover:translate-x-full">
+          <span className="ease absolute flex h-full w-full transform items-center justify-center transition-all duration-500 group-hover:translate-x-full border border-white">
             Get Started Quickly
           </span>
           <span className="invisible relative">Button Text</span>

@@ -32,7 +32,7 @@ export const Appbar = () => {
                     <div className="flex items-center space-x-3">
                         <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
                         <Link to="/blogs" className="text-2xl font-extrabold tracking-wide cursor-pointer text-gray-900 dark:text-white">
-                            Blogify
+                            Thought Canvas
                         </Link>
                     </div>
 

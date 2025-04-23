@@ -41,30 +41,29 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
   }, [summaryCache]);
 
   const summarizeContent = async (content: string) => {
-    const cacheKey = content.slice(0, 100) + content.length; // Unique key for caching
-
-    // Check cache (valid for 24 hours)
+    const cacheKey = content.slice(0, 100) + content.length;
+  
     if (summaryCache[cacheKey] && Date.now() - summaryCache[cacheKey].timestamp < 86400000) {
       setSummary(summaryCache[cacheKey].summary);
       return;
     }
-
-    // Rate limit check (15 seconds between requests)
+  
     if (Date.now() - lastAttempt < 15000) {
       setSummary("Please wait 15 seconds before requesting another summary.");
       return;
     }
-
+  
     setIsLoading(true);
     setLastAttempt(Date.now());
-
+  
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const prompt = `Summarize this blog post in 5-7 bullet points:\n\n${content.slice(0, 30000)}`;
-
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" }); // Updated model name
+      const prompt = `Provide a concise summary of the following blog post in 5-7 bullet points. Do not include any introductory phrases like "Here is your summary" or use formatting such as **. Simply list the bullet points:\n\n${content.slice(0, 30000)}`;
+      
+  
       const result = await model.generateContent(prompt);
       const text = result.response.text();
-
+  
       setSummary(text);
       setSummaryCache((prev) => ({
         ...prev,
@@ -108,7 +107,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
 
           {/* Author Section */}
           <div className="md:col-span-4 md:pl-6 mt-6 md:mt-0">
-            <div className="border border-neutral-700 p-5 rounded-lg shadow-lg  mb-4">
+            <div className="border-neutral-700 p-5 rounded-lg  mb-4">
               <h1 className="text-gray-400 text-lg font-semibold mb-4 ">Author</h1>
               <div className="items-center flex">
                 <Avatar size="big" name={blog.author.name || "Anonymous"} />
@@ -154,7 +153,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                   </div>
                 </div>
               ) : (
-                <div className="my-6 text-gray-500 text-center">
+                <div className="text-[#171717] text-center">
                   {summary === "Rate limit exceeded. Please try again later."
                     ? "Rate limit exceeded. Please try again later."
                     : "Click the button above to generate a summary."}

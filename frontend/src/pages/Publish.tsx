@@ -3,6 +3,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
+import Footer from "../components/Footer";
 
 export const Publish = () => {
   const [title, setTitle] = useState("");
@@ -31,27 +32,27 @@ export const Publish = () => {
             }}
           />
           <div className="flex justify-end">
-          <button
-            onClick={async () => {
-              const response = await axios.post(
-                `${BACKEND_URL}/api/v1/blog`,
-                {
-                  title,
-                  content: description,
-                },
-                {
-                  headers: {
-                    Authorization: localStorage.getItem("token"),
+            <button
+              onClick={async () => {
+                const response = await axios.post(
+                  `${BACKEND_URL}/api/v1/blog`,
+                  {
+                    title,
+                    content: description,
                   },
-                }
-              );
-              navigate(`/blog/${response.data.id}`);
-            }}
-            type="submit"
-            className="mt-4 inline-flex items-center px-5 py-2.5 text- font-medium text-center text-white bg-blue-700 rounded focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 tracking-wide"
-          >
-            Publish post
-          </button></div>
+                  {
+                    headers: {
+                      Authorization: localStorage.getItem("token"),
+                    },
+                  }
+                );
+                navigate(`/blog/${response.data.id}`);
+              }}
+              type="submit"
+              className="mt-4 inline-flex items-center px-5 py-2.5 text- font-medium text-center text-white bg-blue-700 rounded focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 tracking-wide"
+            >
+              Publish post
+            </button></div>
         </div>
       </div>
     </div>

@@ -1,5 +1,3 @@
-import { Circle } from "./BlogCard"
-
 export const BlogSkeleton = () => {
     return <div role="status" className="animate-pulse">
    <div className="bg-neutral-800 rounded-lg shadow-md overflow-hidden animate-pulse">
